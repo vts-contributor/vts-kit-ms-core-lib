@@ -1,4 +1,4 @@
-package com.viettel.his.common;
+package com.viettel.vtskit.common;
 
 import org.junit.Assert;
 import org.junit.Test;

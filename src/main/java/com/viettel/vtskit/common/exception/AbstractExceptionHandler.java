@@ -1,6 +1,7 @@
-package com.viettel.his.common.rest;
+package com.viettel.vtskit.common.exception;
 
-import com.viettel.his.common.utils.RestUtils;
+import com.viettel.vtskit.common.rest.ErrorDTO;
+import com.viettel.vtskit.common.utils.RestUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;

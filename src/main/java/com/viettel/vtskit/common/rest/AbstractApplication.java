@@ -1,4 +1,4 @@
-package com.viettel.his.common.rest;
+package com.viettel.vtskit.common.rest;
 
 import org.springframework.context.annotation.Import;
 

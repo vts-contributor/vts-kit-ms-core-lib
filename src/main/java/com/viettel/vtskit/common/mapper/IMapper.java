@@ -1,4 +1,4 @@
-package com.viettel.his.common.rest;
+package com.viettel.vtskit.common.mapper;
 
 import java.util.List;
 

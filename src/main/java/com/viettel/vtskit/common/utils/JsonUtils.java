@@ -1,4 +1,4 @@
-package com.viettel.his.common.utils;
+package com.viettel.vtskit.common.utils;
 
 import com.google.gson.Gson;
 

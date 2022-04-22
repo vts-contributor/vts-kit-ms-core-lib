@@ -1,6 +1,6 @@
-package com.viettel.his.common.utils;
+package com.viettel.vtskit.common.utils;
 
-class StringUtils {
+public class StringUtils {
 
     private StringUtils(){
         // Disable New Instance

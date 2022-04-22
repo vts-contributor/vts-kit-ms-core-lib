@@ -1,6 +1,6 @@
-package com.viettel.his.common.utils;
+package com.viettel.vtskit.common.utils;
 
-import com.viettel.his.common.rest.ErrorDTO;
+import com.viettel.vtskit.common.rest.ErrorDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -19,6 +19,10 @@ public class RestUtils {
 
     public static <T> ResponseEntity<T> responseOk(T data){
         return ResponseEntity.ok(data);
+    }
+
+    public static <T> ResponseEntity<T> response404(T data){
+        return responseStatus(HttpStatus.NOT_FOUND, data);
     }
 
     public static <T> ResponseEntity<T> responseStatus(HttpStatus httpStatus, T data){
