@@ -22,6 +22,7 @@ public abstract class AbstractApiDocsConfig {
         return openAPI;
     }
 
+
     /**
     @Bean
     public OperationCustomizer customGlobalHeaders() {
