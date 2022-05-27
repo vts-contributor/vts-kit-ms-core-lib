@@ -23,7 +23,7 @@ public class InternationalizationUtils {
 		return messageBundle().getMessage(msgCode, null, locale);
 	}
 
-	public synchronized static ResourceBundleMessageSource messageBundle() {
+	public static synchronized ResourceBundleMessageSource messageBundle() {
 		if(messageBundle != null){
 			return messageBundle;
 		}
