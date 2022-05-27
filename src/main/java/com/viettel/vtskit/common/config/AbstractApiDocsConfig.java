@@ -15,13 +15,14 @@ public abstract class AbstractApiDocsConfig {
 
     @Bean
     public OpenAPI customOpenAPI() {
+        String docTitle = (appName + "-API").toUpperCase();
+        String docDescription = "Auto Generated Docs";
         OpenAPI openAPI = new OpenAPI();
         System.setProperty("springdoc.api-docs.path", "/api-docs");
         System.setProperty("springdoc.swagger-ui.enabled", "false");
-        openAPI.info(new Info().title((appName + "-API").toUpperCase()).description("Auto Generated Docs").version(appVersion));
+        openAPI.info(new Info().title(docTitle).description(docDescription).version(appVersion));
         return openAPI;
     }
-
 
     /**
     @Bean
