@@ -1,6 +1,5 @@
 Quick start
 -------
-* Just add the dependency to an existing Spring Boot project
 ```xml
 <dependency>
   <groupId>com.atviettelsolutions</groupId>
