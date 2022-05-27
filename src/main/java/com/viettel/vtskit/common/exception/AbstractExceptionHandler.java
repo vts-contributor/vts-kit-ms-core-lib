@@ -4,6 +4,8 @@ import com.viettel.vtskit.common.rest.ErrorDTO;
 import com.viettel.vtskit.common.utils.RestUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingRequestHeaderException;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 
 import javax.validation.ConstraintViolationException;
-import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,8 +21,13 @@ import java.util.stream.Collectors;
 public abstract class AbstractExceptionHandler {
 
     @ExceptionHandler({AccessDeniedException.class})
-    protected ResponseEntity<ErrorDTO> handleAccessDeniedException() {
+    protected ResponseEntity<ErrorDTO> handleAccessDeniedException(AccessDeniedException ex) {
         return RestUtils.responseStatus(HttpStatus.FORBIDDEN, new ErrorDTO(HttpStatus.FORBIDDEN.value(), "Access Denied"));
+    }
+
+    @ExceptionHandler({AuthenticationException.class})
+    protected ResponseEntity<ErrorDTO> handleAccessDeniedException(AuthenticationException ex) {
+        return RestUtils.responseStatus(HttpStatus.UNAUTHORIZED, new ErrorDTO(HttpStatus.UNAUTHORIZED.value(), "Unauthorized"));
     }
 
     @ExceptionHandler({Exception.class})
