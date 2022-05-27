@@ -18,46 +18,42 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class AbstractExceptionHandler {
+public interface IExceptionHandler {
 
     @ExceptionHandler({AccessDeniedException.class})
-    protected ResponseEntity<ErrorDTO> handleAccessDeniedException(AccessDeniedException ex) {
+    default ResponseEntity<ErrorDTO> handleAccessDeniedException(AccessDeniedException ex) {
         return RestUtils.responseStatus(HttpStatus.FORBIDDEN, new ErrorDTO(HttpStatus.FORBIDDEN.value(), "Access Denied"));
     }
 
     @ExceptionHandler({AuthenticationException.class})
-    protected ResponseEntity<ErrorDTO> handleAccessDeniedException(AuthenticationException ex) {
+    default ResponseEntity<ErrorDTO> handleAuthenticationException(AuthenticationException ex) {
         return RestUtils.responseStatus(HttpStatus.UNAUTHORIZED, new ErrorDTO(HttpStatus.UNAUTHORIZED.value(), "Unauthorized"));
     }
 
     @ExceptionHandler({Exception.class})
-    protected ResponseEntity<ErrorDTO> handleCommonException(Exception ex) {
+    default ResponseEntity<ErrorDTO> handleCommonException(Exception ex) {
         return RestUtils.responseServerError();
     }
 
     @ExceptionHandler({MethodArgumentNotValidException.class})
-    protected ResponseEntity<ErrorDTO> handleMethodArgumentException(MethodArgumentNotValidException ex) {
+    default ResponseEntity<ErrorDTO> handleMethodArgumentException(MethodArgumentNotValidException ex) {
         List<String> errorList = new ArrayList<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            errorList.add(error.getDefaultMessage());
-        });
+        ex.getBindingResult().getAllErrors().forEach(error -> errorList.add(error.getDefaultMessage()));
         String errorMessage = errorList.stream().collect(Collectors.joining("; "));
         return RestUtils.responseStatus(HttpStatus.BAD_REQUEST, new ErrorDTO(HttpStatus.BAD_REQUEST.value(), errorMessage));
     }
 
     @ExceptionHandler({ConstraintViolationException.class})
-    protected ResponseEntity<ErrorDTO> handleConstraintViolationException(ConstraintViolationException ex) {
+    default ResponseEntity<ErrorDTO> handleConstraintViolationException(ConstraintViolationException ex) {
         List<String> errorList = new ArrayList<>();
-        ex.getConstraintViolations().forEach((error) -> {
-            errorList.add(error.getMessage());
-        });
+        ex.getConstraintViolations().forEach(error -> errorList.add(error.getMessage()));
         String errorMessage = errorList.stream().collect(Collectors.joining("; "));
         return RestUtils.responseStatus(HttpStatus.BAD_REQUEST, new ErrorDTO(HttpStatus.BAD_REQUEST.value(), errorMessage));
     }
 
     @ExceptionHandler({BindException.class, MissingServletRequestPartException.class,
             MissingServletRequestParameterException.class, MissingRequestHeaderException.class})
-    protected ResponseEntity<ErrorDTO> handleMissingPartException(Exception ex) {
+    default ResponseEntity<ErrorDTO> handleMissingPartException(Exception ex) {
         return RestUtils.responseStatus(HttpStatus.BAD_REQUEST, new ErrorDTO(HttpStatus.BAD_REQUEST.value(), ex.getMessage()));
     }
 

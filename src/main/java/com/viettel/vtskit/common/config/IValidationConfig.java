@@ -4,10 +4,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-public abstract class AbstractValidationConfig {
+public interface IValidationConfig {
 
     @Bean
-    public LocalValidatorFactoryBean localValidatorFactoryBean() {
+    default LocalValidatorFactoryBean localValidatorFactoryBean() {
         LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
         ResourceBundleMessageSource messageBundle = new ResourceBundleMessageSource();
         messageBundle.setBasenames("validation");
